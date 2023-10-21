@@ -4,6 +4,8 @@ import { getHerd } from "./routes/getHerd";
 import { placeOrder } from "./routes/placeOrder";
 import helmet from "helmet";
 import RateLimit from "express-rate-limit";
+import { validateDay } from "./middleware/dayValidator";
+import { validateOrder } from "./middleware/orderValidator";
 
 const app: Application = express();
 const port = process.env.PORT || 8000;
@@ -11,7 +13,7 @@ const port = process.env.PORT || 8000;
 //Setting up rate limiting for all apis to prevent DDOS attacks
 //Currently set to 500 requests/min as we anticipate low genuine traffic initially for our YAK store
 const limiter = RateLimit({
-  windowMs: 1 * 60 * 1000, 
+  windowMs: 1 * 60 * 1000,
   max: 500,
 });
 app.use(limiter);
@@ -41,9 +43,9 @@ app.use(
   })
 );
 
-app.get("/yak-shop/stock/:day", getStock);
-app.get("/yak-shop/herd/:day", getHerd);
-app.post("/yak-shop/order/:day", placeOrder);
+app.get("/yak-shop/stock/:day", validateDay, getStock);
+app.get("/yak-shop/herd/:day", validateDay, getHerd);
+app.post("/yak-shop/order/:day", validateDay, validateOrder, placeOrder);
 
 app.listen(port, async () => {
   console.log(`Yak Server has started at http://localhost:${port}`);
