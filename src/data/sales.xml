@@ -1,0 +1,5 @@
+<Sales>
+    <Day date="10/22/2023" milk="100" skins="3"/>
+    <Day date="10/23/2023" milk="200" skins="10"/>
+    <Day date="10/24/2023" milk="150" skins="4"/>
+</Sales>

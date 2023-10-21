@@ -1,11 +1,10 @@
+import { herdFilePath } from "../../constants/const";
 import { Stock } from "../../interfaces/Stock";
-import { readDataFromFile } from "../../utilities/readDataFromFile";
+import { readHerdDataFromFile } from "../../utilities/readDataFromFile";
 import { calculateStock } from "../calculateStock";
 
 export const getStockData = async (elapsedTime: number): Promise<Stock> => {
-  const filename = "src/herd.xml";
-
-  const herd = await readDataFromFile(filename);
+  const herd = await readHerdDataFromFile(herdFilePath);
   return calculateStock(herd, elapsedTime);
 };
 

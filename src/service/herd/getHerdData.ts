@@ -1,10 +1,9 @@
+import { herdFilePath } from "../../constants/const";
 import { Yak } from "../../interfaces/Yak";
-import { readDataFromFile } from "../../utilities/readDataFromFile";
+import { readHerdDataFromFile } from "../../utilities/readDataFromFile";
 import { computeHerd } from "../stock/computeSkin";
 
 export const getHerdData = async (elapsedTime: number): Promise<Yak[]> => {
-  const filename = "src/herd.xml";
-
-  const herd = await readDataFromFile(filename);
+  const herd = await readHerdDataFromFile(herdFilePath);
   return computeHerd(herd, elapsedTime);
 };

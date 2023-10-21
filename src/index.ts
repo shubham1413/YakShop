@@ -6,6 +6,8 @@ import helmet from "helmet";
 import RateLimit from "express-rate-limit";
 import { validateDay } from "./middleware/dayValidator";
 import { validateOrder } from "./middleware/orderValidator";
+import { getSales } from "./routes/getSales";
+import { validateDateParams } from "./middleware/dateValidator";
 
 const app: Application = express();
 const port = process.env.PORT || 8000;
@@ -43,8 +45,12 @@ app.use(
 );
 
 app.get("/yak-shop/stock/:day", validateDay, getStock);
+
 app.get("/yak-shop/herd/:day", validateDay, getHerd);
+
 app.post("/yak-shop/order/:day", validateDay, validateOrder, placeOrder);
+
+app.get("/yak-shop/sales/", validateDateParams, getSales);
 
 app.listen(port, async () => {
   console.log(`Yak Shop Server has started at http://localhost:${port}`);

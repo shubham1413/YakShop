@@ -2,7 +2,7 @@ import { Herd } from "../interfaces/Herd";
 import * as fs from "fs";
 import * as xml2js from "xml2js";
 
-export const readDataFromFile = (filename: string): Promise<Herd> => {
+export const readHerdDataFromFile = (filename: string): Promise<Herd> => {
   return new Promise((resolve, reject) => {
     const xml = fs.readFileSync(filename, "utf-8");
 
