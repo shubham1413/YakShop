@@ -82,7 +82,16 @@ This API accepts date range and returns stock sold between these dates will be u
 }
 ```
 
-###### Note: For Code reviewers
+#### Deployment using Docker (Bonus feature)
+
+This application can be effortlessly deployed in any environment by utilizing Docker. Within the root directory, you'll find a Docker file that efficiently manages all the necessary environment dependencies. To successfully run this application using Docker, follow these steps:
+
+1. cd to root directory of this project
+2. Execute `docker build -t yak-shop . `
+3. Execute `docker run -p 8080:8000 yak-shop`
+4. Access the apis using `http://localhost:8080/yak-shop/api-docs/`
+
+#### Safeguarding API's Against Vulnerabilities(Bonus feature)
 
 Please refer to this file `src/index.ts` this contains information related to different routes being used in code.
 You can find bunch of security best practices that have been followed while developing these apis.
@@ -90,5 +99,3 @@ Refer to line 23 that adds [rate limits](https://www.npmjs.com/package/express-r
 Refer to line 25 that limits size of json payload
 
 Refer to line 35 that Defines a CSP policy using node js package [helmet](https://www.npmjs.com/package/helmet "https://www.npmjs.com/package/helmet") that restricts how resources are loaded and executed in web pages.The goal is to minimize the risk of Cross-Site Scripting (XSS) attacks, data injection, and other related vulnerabilities.
-
-These are covered as part of Bonus features
