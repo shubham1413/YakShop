@@ -86,10 +86,11 @@ This API accepts date range and returns stock sold between these dates will be u
 
 This application can be effortlessly deployed in any environment by utilizing Docker. Within the root directory, you'll find a Docker file that efficiently manages all the necessary environment dependencies. To successfully run this application using Docker, follow these steps:
 
-1. cd to root directory of this project
-2. Execute `docker build -t yak-shop . `
-3. Execute `docker run -p 8080:8000 yak-shop`
-4. Access the apis using `http://localhost:8080/yak-shop/api-docs/`
+1. Install docker using [orbstack](https://docs.orbstack.dev/install "https://docs.orbstack.dev/install") or docker [desktop](https://www.docker.com/products/docker-desktop/ "https://www.docker.com/products/docker-desktop/")
+2. cd to root directory of this project
+3. Execute `docker build -t yak-shop . `
+4. Execute `docker run -p 8080:8000 yak-shop`
+5. Access the apis using `http://localhost:8080/yak-shop/api-docs/`
 
 #### Safeguarding API's Against Vulnerabilities(Bonus feature)
 
