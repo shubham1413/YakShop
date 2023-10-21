@@ -3,9 +3,18 @@ import { getStock } from "./routes/getStock";
 import { getHerd } from "./routes/getHerd";
 import { placeOrder } from "./routes/placeOrder";
 import helmet from "helmet";
+import RateLimit from "express-rate-limit";
 
 const app: Application = express();
 const port = process.env.PORT || 8000;
+
+//Setting up rate limiting for all apis to prevent DDOS attacks
+//Currently set to 500 requests/min as we anticipate low genuine traffic initially for our YAK store
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000, 
+  max: 500,
+});
+app.use(limiter);
 
 //Reduced the size of request body to prevent flooding server quickly during ddos attack
 app.use(express.json({ limit: "256kb" }));
