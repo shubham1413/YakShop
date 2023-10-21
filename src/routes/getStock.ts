@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import HttpStatus from "http-status-codes";
-import { stockService } from "../stock";
+import { getStockData } from "../service/stock/getStockData";
 
 const TAG = "[getStock]";
 
@@ -11,7 +11,7 @@ export const getStock = async (
   try {
     const elapsedDay = parseInt(req.params.day);
 
-    const stock = await stockService(elapsedDay);
+    const stock = await getStockData(elapsedDay);
     return res.status(HttpStatus.OK).json({
       ...stock,
     });

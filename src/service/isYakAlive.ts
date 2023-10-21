@@ -5,7 +5,6 @@
  */
 export const isYakAlive = (age: number): boolean => {
   if (age >= 1000) {
-    console.log("Yak is dead");
     return false;
   }
   return true;

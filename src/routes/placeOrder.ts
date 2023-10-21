@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import HttpStatus from "http-status-codes";
-import { stockService } from "../stock";
 import { OrderRequest } from "../interfaces/OrderRequest";
+import { getStockData } from "../service/stock/getStockData";
 
 const TAG = "[placeOrder]";
 
@@ -15,7 +15,7 @@ export const placeOrder = async (
     const { milk, skins } = orderReq?.order;
     const elapsedDay = parseInt(req.params.day);
 
-    const stock = await stockService(elapsedDay);
+    const stock = await getStockData(elapsedDay);
 
     if (milk <= stock.milk && skins <= stock.skins) {
       return res.status(HttpStatus.CREATED).json({

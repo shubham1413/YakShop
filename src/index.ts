@@ -38,7 +38,6 @@ app.use(
       baseUri: ["'self'"],
       formAction: ["'self'"],
       frameAncestors: ["'none'"],
-      reportUri: "/csp-violation-report-endpoint",
     },
   })
 );
@@ -48,5 +47,5 @@ app.get("/yak-shop/herd/:day", validateDay, getHerd);
 app.post("/yak-shop/order/:day", validateDay, validateOrder, placeOrder);
 
 app.listen(port, async () => {
-  console.log(`Yak Server has started at http://localhost:${port}`);
+  console.log(`Yak Shop Server has started at http://localhost:${port}`);
 });

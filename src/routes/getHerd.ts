@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import HttpStatus from "http-status-codes";
-import { herdService, stockService } from "../stock";
+import { getHerdData } from "../service/herd/getHerdData";
 
 const TAG = "[getHerd]";
 
@@ -11,7 +11,7 @@ export const getHerd = async (
   try {
     const elapsedDay = parseInt(req.params.day);
 
-    const herd = await herdService(elapsedDay);
+    const herd = await getHerdData(elapsedDay);
     return res.status(HttpStatus.OK).json({
       herd,
     });
