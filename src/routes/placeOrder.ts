@@ -13,9 +13,11 @@ export const placeOrder = async (
     console.log(req);
     const orderReq = req.body as OrderRequest;
     const { milk, skins } = orderReq?.order;
-    const elapsedDay = parseInt(req.params.day);
+    const currentDay = parseInt(req.params.day);
 
-    const stock = await getStockData(elapsedDay);
+    //Sending incremented value of currentDay as getStockData works on elapsed time
+    //but we are dealing T that has not elapsed
+    const stock = await getStockData(currentDay+1);
 
     if (milk <= stock.milk && skins <= stock.skins) {
       return res.status(HttpStatus.CREATED).json({

@@ -1,0 +1,29 @@
+/yak-shop/sales:
+    get:
+        tags:
+            - sales
+        summary: Returns summary of sales based on date range 
+        description: |
+            Returns summary of sales based on date range  
+        parameters:
+            - name: from
+              in: query
+              description: start date (MM/DD/YYYY)
+              required: true
+              schema:
+                   type: string
+                   format: date
+            - name: to
+              in: query
+              description: end date (MM/DD/YYYY)
+              required: true
+              schema:
+                   type: string
+                   format: date       
+        responses:
+            "200":
+                description: OK
+            "429":
+                description: Rate Limiting
+            "400":
+                description: Bad gateway      

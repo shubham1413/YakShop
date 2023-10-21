@@ -1,0 +1,24 @@
+/yak-shop/herd/{day}:
+    get:
+        tags:
+            - herd
+        summary: Returns details of herd 
+        description: |
+            Returns details of herd 
+        parameters:
+            - name: day
+              in: path
+              description: elapsed-day
+              required: true
+              schema:
+                  type: integer
+                  format: int32 
+        responses:
+            "200":
+                description: OK
+            "429":
+                description: Rate Limiting
+            "400":
+                description: Bad gateway      
+    
+                         

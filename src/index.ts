@@ -9,8 +9,14 @@ import { validateOrder } from "./middleware/orderValidator";
 import { getSales } from "./routes/getSales";
 import { validateDateParams } from "./middleware/dateValidator";
 
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./docs/swaggerSpec";
+
+
 const app: Application = express();
 const port = process.env.PORT || 8000;
+
+app.use('/yak-shop/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 //Setting up rate limiting for all apis to prevent DDOS attacks
 //Currently set to 500 requests/min as we anticipate low genuine traffic initially for our YAK store
@@ -43,7 +49,6 @@ app.use(
     },
   })
 );
-
 app.get("/yak-shop/stock/:day", validateDay, getStock);
 
 app.get("/yak-shop/herd/:day", validateDay, getHerd);

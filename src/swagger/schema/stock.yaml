@@ -1,0 +1,72 @@
+/yak-shop/stock/{day}:
+    get:
+        tags:
+            - stock
+        summary: Returns stock available in yak-shop after elapsed day
+        description: |
+            Returns stock available in yak-shop after elapsed day
+        parameters:
+            - name: day
+              in: path
+              description: elapsed-day
+              required: true
+              schema:
+                  type: integer
+                  format: int32 
+        responses:
+            "200":
+                description: OK
+            "429":
+                description: Rate Limiting
+            "400":
+                description: Bad gateway      
+
+/yak-shop/order/{day}:
+    post:
+      tags:
+        - stock
+      summary: Place order to yak-shop
+      description: |
+        Can place an order to yak-shop for milk and skin
+      parameters:
+        - name: day
+          in: path
+          required: true
+          description: The day for which the order is placed.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customer:
+                  type: string
+                  description: The name of the customer.
+                order:
+                  type: object
+                  properties:
+                    milk:
+                      type: integer
+                      description: The quantity of milk in the order.
+                    skins:
+                      type: integer
+                      description: The quantity of skins in the order.
+              required:
+                - customer
+                - order
+                - milk
+                - skins
+      responses:
+            "201":
+                description: Created      
+            "206":
+                description: Partial
+            "404":
+                description: Out of Stock        
+            "429":
+                description: Rate Limiting
+            "400":
+                description: Bad gateway        
